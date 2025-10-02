@@ -77,7 +77,7 @@ class BatteryLevelSensor(SensorEntity):
 
 class BatteryVoltageSensor(SensorEntity):
     """
-    Sensor entity for UPS battery voltage (in volts).
+    Sensor entity that represents the UPS battery voltage.
     Reads raw data from I2C register 0x02 and converts it to a voltage value.
     """
     _attr_name = "UPS Battery Voltage"
@@ -87,6 +87,8 @@ class BatteryVoltageSensor(SensorEntity):
 
     def __init__(self):
         self._state = None
+        # I2C bus number, typically '1' on Raspberry Pi
+        self._bus = smbus2.SMBus(1) # Bus wird im Init erstellt
 
     @property
     def native_value(self):
@@ -99,10 +101,13 @@ class BatteryVoltageSensor(SensorEntity):
         Reads from the device using I2C and calculates the battery voltage.
         """
         try:
+            # Register 0x02 für Spannung (VCELL)
             raw = self._read_register(DEVICE_ADDRESS, 0x02)
             if raw is not None:
-                # The scaling factor 78.125 μV per bit (from hardware datasheet).
-                self._state = round(raw * 78.125 / 1_000_000, 3)
+                # Skalierungsfaktor 78.125 μV pro Bit.
+                # WICHTIG: Multiplikation mit 2, da der X728 (2S) die Spannung eines einzelnen Akkus meldet.
+                voltage_single_cell = raw * 78.125 / 1_000_000
+                self._state = round(voltage_single_cell * 2, 3) 
             else:
                 self._state = None
         except Exception as e:
@@ -115,9 +120,10 @@ class BatteryVoltageSensor(SensorEntity):
         and returns the integer value or None if an error occurs.
         """
         try:
-            data = bus.read_word_data(address, register)
+            # WICHTIG: Wir verwenden self._bus anstelle der globalen Variable bus
+            data = self._bus.read_word_data(address, register)
             swapped = ((data & 0xFF) << 8) | (data >> 8)
             return swapped
-        except Exception as e:
-            _LOGGER.error("I2C error reg=0x%02X: %s", register, e)
+        except Exception:
+            # Bei Fehlern (z.B. Bus-Timeout) None zurückgeben.
             return None
