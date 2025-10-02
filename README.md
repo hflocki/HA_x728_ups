@@ -47,9 +47,9 @@ Damit die Integration auf I2C (`/dev/i2c-1`) und GPIO (`/dev/gpiochip0`) zugreif
 
 Verwenden Sie die erstellten Entitäten, um Ihren Home Assistant Host sicher herunterzufahren:
 
-**Trigger:** `binary_sensor.ups_ac_power_status` wechselt zu `off` (AC Lost) für 1 Minute.
+**Trigger:** `binary_sensor.ups_ac_power_status` wechselt von `on` zu `off` (AC Lost) für 1 Minute.
 **Aktion:**
-1.  Home Assistant Host sicher herunterfahren (`homeassistant.shutdown`).
+1.  Home Assistant Host sicher herunterfahren (`hassio.host_shutdown`).
 2.  Den `switch.ups_safe_shutdown_trigger` (GPIO 26) aktivieren, um den X728-HAT in den Low-Power-Modus zu versetzen.
 
 ```yaml
