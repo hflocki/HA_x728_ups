@@ -53,21 +53,34 @@ Verwenden Sie die erstellten Entitäten, um Ihren Home Assistant Host sicher her
 2.  Den `switch.ups_safe_shutdown_trigger` (GPIO 26) aktivieren, um den X728-HAT in den Low-Power-Modus zu versetzen.
 
 ```yaml
-id: 'x728_safe_shutdown_bei_ac_verlust'
-alias: X728 Safe Shutdown bei AC Verlust
-description: Fährt den Home Assistant Host sicher herunter und pulst den X728 HAT Shutdown Pin.
-trigger:
-  - platform: state
-    entity_id: binary_sensor.ups_ac_power_status
-    to: 'off' 
+alias: UPS Save Shutdown
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - binary_sensor.ups_ac_power_status
+    from: "on"
+    to: "off"
     for:
-      minutes: 1 
-action:
-  # 1. Host-Shutdown des Home Assistant OS einleiten (Wichtig für Datenintegrität)
-  - service: homeassistant.stop # Verwendet den allgemeinen HA-Stop-Dienst, der den Host-Shutdown auslöst
+      hours: 0
+      minutes: 1
+      seconds: 0
+conditions: []
+actions:
+  - action: telegram_bot.send_message
+    metadata: {}
+    data:
+      config_entry_id: xxxxxxxxxxxxxxxxxxxxxxxxx
+      title: ⚠️⚠️ Achtung kritische Spannungsversorgung ⚠️⚠️
+      message: Homeassistant wird jetzt herunter gefahren.
+  - action: hassio.host_shutdown
+    metadata: {}
     data: {}
-    
-  # 2. Den Safe Shutdown Switch aktivieren (Pulst GPIO 26 für 3 Sekunden)
-  - service: switch.turn_on
-    entity_id: switch.ups_safe_shutdown_trigger
+  - action: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.ups_safe_shutdown_trigger
 mode: single
+
+
