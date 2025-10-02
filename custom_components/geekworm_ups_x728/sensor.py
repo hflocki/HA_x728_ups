@@ -11,10 +11,10 @@ from . import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
-# Default I2C address for Suptronics UPS
+# Default I2C address for Geekworm UPS
 DEVICE_ADDRESS = 0x36
 # I2C bus number, typically '1' on Raspberry Pi
-bus = smbus2.SMBus(1)
+#bus = smbus2.SMBus(1)
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback) -> None:
     """
