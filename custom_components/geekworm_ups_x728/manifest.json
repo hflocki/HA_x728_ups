@@ -1,7 +1,7 @@
 {
     "domain": "geekworm_ups_x728",
     "name": "Geekworm X728 UPS",
-    "version": "1.0.0",
+    "version": "1.0.1-alpha",
     "issue_tracker": "https://github.com/hflocki/HA_x728_ups/issues",
     "config_flow": true,
     "requirements": ["smbus2", "gpiod>=2.2.1"],
