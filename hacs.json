@@ -1,0 +1,6 @@
+{
+  "name": "Geekworm X728 UPS",
+  "homeassistant": "2023.10.0", 
+  "render_readme": true,
+  "domains": ["sensor", "binary_sensor", "switch"]
+}
