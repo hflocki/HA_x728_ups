@@ -1,4 +1,5 @@
-# ![Geekworm X728 UPS Icon](custom_components/geekworm_ups_x728/icon.png) Home Assistant Custom Component: Geekworm X728 UPS
+# ![Geekworm X728 UPS Icon](custom_components/geekworm_ups_x728/icon.png) 
+# Home Assistant Custom Component: Geekworm X728 UPS
 (used template: Suptronics UPS X120x Home Assistant Integration, https://github.com/soukal24/ha_suptronics_ups_x120x)
 
 Diese Integration (Custom Component) ermöglicht die direkte Überwachung und Steuerung des **Geekworm X728 UPS HAT** auf Home Assistant OS (HAOS) Systemen, die auf einem Raspberry Pi laufen.
