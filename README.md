@@ -84,22 +84,3 @@ actions:
 mode: single
 
 ```
-
-### 🔧 Fehlerbehebung (Troubleshooting)
-
-Spannung wird nur als ganze Zahl angezeigt (z.B. "8 V" statt "8.400 V")
-
-Dies ist ein Anzeigeproblem in Home Assistant, das auftritt, obwohl die Custom Component den Wert mit Nachkommastellen berechnet. Um die Anzeige der korrekten Dezimalstellen zu erzwingen, erstellen Sie einen Template Sensor in Ihrer configuration.yaml (oder der entsprechenden sensors.yaml-Datei) unter dem template: Block:
-
-```YAML
-
-template:
-  - sensor:
-      - name: "UPS Batteriespannung genau"
-        unique_id: "ups_battery_voltage_exact"
-        state: "{{ states('sensor.ups_battery_voltage') | float | round(3) }}"
-        unit_of_measurement: "V"
-        device_class: voltage
-        state_class: measurement
-Aktion: Nach dem Speichern müssen Sie die Template-Entitäten neu laden (Entwicklerwerkzeuge ⚙️ > YAML) oder einen vollständigen Home Assistant Neustart durchführen. Die neue Entität sensor.ups_batteriespannung_genau zeigt dann den korrekten, genauen Wert an.
-```
