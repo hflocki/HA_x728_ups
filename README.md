@@ -84,3 +84,19 @@ actions:
 mode: single
 
 ```
+
+🔧 Fehlerbehebung (Troubleshooting)
+Spannung wird nur als ganze Zahl angezeigt (z.B. "8 V" statt "8.400 V")
+Obwohl die Integration den Wert korrekt als Fließkommazahl liefert, kann Home Assistant ihn standardmäßig auf eine Ganzzahl runden (z.B. 8 V).
+
+Korrektur über die Benutzeroberfläche (Empfohlen)
+
+Gehen Sie zu Einstellungen ⚙️ > Geräte & Dienste > Ihre Integration (z.B. Geekworm X728 UPS).
+
+Klicken Sie auf die Entität sensor.ups_battery_voltage.
+
+Klicken Sie oben rechts auf das Zahnrad-Symbol ⚙️ (Einstellungen).
+
+Suchen Sie nach einem Feld wie "Anzahl der Dezimalstellen" oder "Anzeigeformat" und stellen Sie sicher, dass ein Wert von 2 oder 3 Dezimalstellen aktiv ist.
+
+Speichern Sie die Änderung.
