@@ -2,9 +2,7 @@
 # Home Assistant Custom Component: Geekworm X728 UPS
 (used template: Suptronics UPS X120x Home Assistant Integration, https://github.com/soukal24/ha_suptronics_ups_x120x)
 
-Diese Integration (Custom Component) ermöglicht die direkte Überwachung und Steuerung des **Geekworm X728 UPS HAT** auf Home Assistant OS (HAOS) Systemen, die auf einem Raspberry Pi laufen.
-
-Sie ersetzt die Notwendigkeit eines separaten Add-ons und nutzt direkt die Host-Funktionen (GPIO und I2C) des Betriebssystems.
+Diese Integration (Custom Component) ermöglicht die direkte Überwachung und Steuerung des **Geekworm X728 UPS HAT** auf Home Assistant OS (HAOS) Systemen, die auf einem Raspberry Pi laufen nutzt direkt die Host-Funktionen (GPIO und I2C) des Betriebssystems.
 
 ## 🚀 Funktionen
 
@@ -29,7 +27,22 @@ Damit die Integration auf I2C (`/dev/i2c-1`) und GPIO (`/dev/gpiochip0`) zugreif
 * **HAOS Modul:** Navigieren Sie im Home Assistant Konfigurationsordner (`/config`) und erstellen Sie den Unterordner `modules`. Fügen Sie in diesem Ordner eine leere Datei namens `i2c-dev` hinzu (oder stellen Sie sicher, dass die Datei das Wort `i2c-dev` enthält).
 * **Host-Neustart:** Führen Sie einen vollständigen **Host-Neustart** durch, damit die Änderungen wirksam werden.
 
-### 2. Custom Component installieren
+### Benutzerdefiniertes Repository in HACS hinzufügen
+Öffnen Sie in Home Assistant den HACS Store (Sidebar).
+
+Gehen Sie zur Kategorie "Integrationen".
+
+Klicken Sie oben rechts auf die drei Punkte (⋮) und wählen Sie "Benutzerdefinierte Repositories".
+
+Fügen Sie die folgenden Informationen in das Pop-up-Fenster ein:
+
+Repository: https://github.com/hflocki/HA_x728_ups
+
+Kategorie: Wählen Sie "Integration".
+
+Klicken Sie auf "Hinzufügen".
+
+### oder manuell
 
 1.  Navigieren Sie zum Home Assistant Konfigurationsverzeichnis (`/config`).
 2.  Erstellen Sie den Ordner **`custom_components`**.
