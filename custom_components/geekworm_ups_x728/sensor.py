@@ -134,7 +134,7 @@ class BatteryVoltageSensor(SensorEntity):
                 # Skalierungsfaktor 78.125 μV pro Bit.
                 voltage_single_cell = raw * 78.125 / 1_000_000
                 # WICHTIG: Multiplikation mit 2 für das 2S-Akkupack (X728).
-                self._state = round(voltage_single_cell * 2, 3) 
+                self._state = float(round(voltage_single_cell * 2, 3) )
             else:
                 self._state = None
         except Exception as e:
