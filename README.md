@@ -85,8 +85,10 @@ mode: single
 
 ```
 
-🔧 Fehlerbehebung (Troubleshooting)
+### 🔧 Fehlerbehebung (Troubleshooting)
+
 Spannung wird nur als ganze Zahl angezeigt (z.B. "8 V" statt "8.400 V")
+
 Dies ist ein Anzeigeproblem in Home Assistant, das auftritt, obwohl die Custom Component den Wert mit Nachkommastellen berechnet. Um die Anzeige der korrekten Dezimalstellen zu erzwingen, erstellen Sie einen Template Sensor in Ihrer configuration.yaml (oder der entsprechenden sensors.yaml-Datei) unter dem template: Block:
 
 ```YAML
